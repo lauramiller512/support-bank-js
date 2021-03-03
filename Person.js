@@ -10,12 +10,9 @@ class Person{
         // Loop through this.transactions
         // if transaction.to is this.name then add transaction.value to moneyowedtoothers
         this.transactions.forEach(transaction => {
-            // console.log(this.name);
-            // console.log(transaction);
             // check if this.name === trans.to 
             if (this.name === transaction.to) {
                 // Add transaction.value to moneyOwedToOthers
-                // console.log('This person owes someone money');
                 this.moneyOwedToOthers += parseFloat(transaction.amount);
                 this.moneyOwedToOthers = Math.round(this.moneyOwedToOthers * 100) / 100
 
@@ -28,12 +25,5 @@ class Person{
         });
     }
 }
-
-function parseAmount(numberStr) {
-    //
-}
-
-//                this.moneyOwedToThisPerson += parseFloat(parseFloat(transaction.amount).toFixed(2));
-
 
 module.exports = Person;
