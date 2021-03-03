@@ -2,7 +2,8 @@
   "dependencies": {
     "csv-parse": "^4.15.3",
     "csv-parser": "^3.0.0",
-    "moment": "^2.29.1"
+    "log4js": "^6.3.0",
+    "moment": "^2.29.1",
+    "readline-sync": "^1.4.10"
   }
 }
-
