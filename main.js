@@ -1,17 +1,29 @@
 const csv = require('csv-parser');
 const fs = require('fs');
 const readlineSync = require('readline-sync');
+const log4js = require("log4js");
+const logger = log4js.getLogger('logs/debug.log');
+logger.level = "debug";
 
 
 const Transaction = require('./Transaction');
 const Banker = require('./Banker');
 const Person = require('./Person');
 
+log4js.configure({
+    appenders: {
+        file: { type: 'fileSync', filename: 'logs/debug.log' }
+    },
+    categories: {
+        default: { appenders: ['file'], level: 'debug'}
+    }
+});
+
 // import Transaction from "./Transaction.js";
 const banker = new Banker();
 
 console.log('Loading transaction file...');
-fs.createReadStream('Transactions2014.csv')
+fs.createReadStream('DodgyTransactions2015.csv')
     .pipe(csv())
     .on('data', (row) => {
         // Do something with each bit of data
@@ -21,8 +33,12 @@ fs.createReadStream('Transactions2014.csv')
         // Calculate all accounts once
         banker.calculateAllAccounts();
         showMainMenu();
+        logger.trace("Tracing cheese");
+        logger.error("Cheese Here");
     });
 
+
+    
 function csvRowToProcess(row) {
     // Save transaction to variable
     let transaction = new Transaction(row.Date, row.From, row.To, row.Narrative, row.Amount);
